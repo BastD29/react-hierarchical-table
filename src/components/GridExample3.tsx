@@ -1,6 +1,6 @@
 import {
-  ColumnDirective,
-  ColumnsDirective,
+  // ColumnDirective,
+  // ColumnsDirective,
   TreeGridComponent,
 } from "@syncfusion/ej2-react-treegrid";
 import { sortData } from "../data/sortData";
