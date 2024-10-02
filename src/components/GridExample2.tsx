@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { FileType } from "../types/file";
-import { getData } from "../data/data";
+import { getData } from "../data/files";
 // import { ColDef, ModuleRegistry } from "ag-grid-community";
 // import { AgGridReact } from "ag-grid-react";
 import { ColDef, ModuleRegistry } from "@ag-grid-community/core";
