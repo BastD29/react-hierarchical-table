@@ -1,9 +1,10 @@
 import { FC } from "react";
+import GridExample1 from "./GridExample1";
 
 const App: FC = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <GridExample1 />
     </>
   );
 };
