@@ -139,10 +139,50 @@ const GridExample4 = () => {
     />
   );
 
-  const renderSelectedLeafNodes = (permission: "read" | "write") => {
-    return Array.from(selectedNodes[permission]).map((id) => (
-      <div key={id}>{id}</div>
-    ));
+  const groupByLevel = (
+    nodes: NodeType[],
+    level: number = 0
+  ): Record<number, string[]> => {
+    const levelMap: Record<number, string[]> = {};
+    const addNodesByLevel = (node: NodeType, currentLevel: number) => {
+      if (!levelMap[currentLevel]) levelMap[currentLevel] = [];
+      levelMap[currentLevel].push(node.id);
+      if (node.children) {
+        node.children.forEach((child) =>
+          addNodesByLevel(child as NodeType, currentLevel + 1)
+        );
+      }
+    };
+    nodes.forEach((node) => addNodesByLevel(node, level));
+    return levelMap;
+  };
+
+  const renderAuthorizationColumns = () => {
+    const nodeLevels = groupByLevel(sectorData.data.roots as NodeType[]);
+    return (
+      <div>
+        {Object.keys(nodeLevels).map((levelStr) => {
+          const level = Number(levelStr); // Convert level string to number
+          return (
+            <div key={level} style={{ marginBottom: "10px" }}>
+              <h4>Level {level}:</h4>
+              <div>
+                <strong>Read Authorized:</strong>{" "}
+                {nodeLevels[level]
+                  .filter((id: string) => selectedNodes.read.has(id))
+                  .join(", ") || "None"}
+              </div>
+              <div>
+                <strong>Write Authorized:</strong>{" "}
+                {nodeLevels[level]
+                  .filter((id: string) => selectedNodes.write.has(id))
+                  .join(", ") || "None"}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
@@ -171,16 +211,7 @@ const GridExample4 = () => {
           />
         </ColumnsDirective>
       </TreeGridComponent>
-
-      <div>
-        <h3>Selected Read Nodes</h3>
-        {renderSelectedLeafNodes("read")}
-      </div>
-
-      <div>
-        <h3>Selected Write Nodes</h3>
-        {renderSelectedLeafNodes("write")}
-      </div>
+      {renderAuthorizationColumns()}
     </div>
   );
 };
