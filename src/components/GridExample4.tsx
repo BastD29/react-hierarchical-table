@@ -41,10 +41,11 @@ const GridExample4 = () => {
       if (checked) {
         updated[permission].add(id);
         propagateToChildren(id, permission, true);
+        propagateToParent(id, permission); // This ensures parents are selected if all children are selected
       } else {
         updated[permission].delete(id);
         propagateToChildren(id, permission, false);
-        propagateToParent(id, permission);
+        propagateToParent(id, permission); // This ensures parents are deselected if any child is deselected
       }
       return updated;
     });
