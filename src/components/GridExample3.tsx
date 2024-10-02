@@ -4,7 +4,11 @@ import { sortData } from "../data/sortData";
 const GridExample3 = () => {
   return (
     <div>
-      <TreeGridComponent dataSource={sortData} />
+      <TreeGridComponent
+        dataSource={sortData}
+        treeColumnIndex={1}
+        childMapping="subtasks"
+      />
     </div>
   );
 };
