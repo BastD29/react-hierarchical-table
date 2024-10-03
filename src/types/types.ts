@@ -44,3 +44,5 @@ export interface Children3 {
   model_code: string;
   children: any[];
 }
+
+export type NodeType = Root2 | Children | Children2 | Children3;
