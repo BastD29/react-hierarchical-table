@@ -14,7 +14,7 @@ import { NodeType } from "../types/types";
  * It uses Syncfusion's TreeGrid component to display hierarchical data and allows users to select
  * permissions for each node.
  */
-const GridExample5 = () => {
+const GridExample = () => {
   // Memoized sector data to avoid unnecessary re-renders
   const sectorData = useMemo(() => data, []);
 
@@ -140,4 +140,4 @@ const GridExample5 = () => {
   );
 };
 
-export default GridExample5;
+export default GridExample;
